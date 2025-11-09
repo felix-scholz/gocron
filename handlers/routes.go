@@ -6,6 +6,7 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 	"github.com/danielgtaylor/huma/v2/adapters/humaecho"
 	"github.com/labstack/echo/v4"
+	"gitlab.unjx.de/flohoss/gocron/web"
 )
 
 func longCacheLifetime(next echo.HandlerFunc) echo.HandlerFunc {
@@ -51,10 +52,12 @@ func SetupRouter(e *echo.Echo, jh *JobHandler, ch *CommandHandler) {
 	})
 
 	assets := e.Group("/assets", longCacheLifetime)
-	assets.Static("/", "web/assets")
+	assetsFS := echo.MustSubFS(web.Assets, "dist/assets")
+	assets.StaticFS("/", assetsFS)
 
 	favicon := e.Group("/static", longCacheLifetime)
-	favicon.Static("/", "web/static")
+	staticsFS := echo.MustSubFS(web.Statics, "dist/static")
+	favicon.StaticFS("/", staticsFS)
 
 	e.RouteNotFound("*", func(ctx echo.Context) error {
 		return ctx.Render(http.StatusOK, "index.html", nil)

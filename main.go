@@ -63,6 +63,12 @@ func main() {
 
 	handlers.SetupRouter(e, jh, ch)
 
+	// Print all registered routes
+	slog.Info("Registered routes:")
+	for _, route := range e.Routes() {
+		slog.Info("Route", "method", route.Method, "path", route.Path)
+	}
+
 	slog.Info("Starting server", "url", fmt.Sprintf("http://%s", config.GetServer()))
 	slog.Error(e.Start(config.GetServer()).Error())
 }

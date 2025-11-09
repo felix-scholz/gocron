@@ -5,6 +5,7 @@ import (
 	"io"
 
 	"github.com/labstack/echo/v4"
+	"gitlab.unjx.de/flohoss/gocron/web"
 )
 
 type Template struct {
@@ -17,6 +18,6 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 func initTemplates() *Template {
 	return &Template{
-		templates: template.Must(template.ParseGlob("web/index.html")),
+		templates: template.Must(template.ParseFS(web.StaticPage, "dist/index.html")),
 	}
 }

@@ -7,7 +7,7 @@
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
 version: 2
 release:
-  name_template: 'Release {{.Tag}}'
+  name_template: '{{.Tag}}'
   footer: >-
     ---
     Released by [GoReleaser](https://github.com/goreleaser/goreleaser).

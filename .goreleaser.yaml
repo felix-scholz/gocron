@@ -24,9 +24,9 @@ builds:
     goarch:
       - amd64
       - arm64
-    binary: bootstrap
-    id: bootstrap
-    main: ./bootstrap/
+    binary: gocron
+    id: main
+    main: .
 archives:
   - formats: [binary]
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
